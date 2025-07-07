@@ -1,0 +1,22 @@
+# Define a versão do Docker Compose. A versão 3.8 é moderna e amplamente compatível.
+version: '3.8'
+
+# Define os serviços (contêineres) que compõem sua aplicação.
+services:
+  # Nome do serviço da sua API.
+  app:
+    # Instrui o Docker Compose a construir a imagem a partir do Dockerfile
+    # localizado no diretório atual ('.').
+    build: .
+    container_name: api
+    # Mapeia a porta 8000 do seu computador (host) para a porta 8000 do contêiner,
+    # que é a porta exposta no Dockerfile.
+    ports:
+      - "8000:8000"
+    # Define os volumes para persistência de dados e live-reloading.
+    volumes:
+      # Monta o diretório atual ('.') no diretório /app do contêiner.
+      # Isso permite que qualquer alteração no seu código seja refletida
+      # instantaneamente dentro do contêiner, o que é ideal para desenvolvimento
+      # com a flag --reload do uvicorn.
+      - .:/app
